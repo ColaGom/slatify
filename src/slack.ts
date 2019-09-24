@@ -62,7 +62,6 @@ export class Slack extends IncomingWebhook {
     const blocks: SectionBlock = {
       type: 'section',
       fields: [
-        { type: 'mrkdwn', text: `*${link_label}*\n<${link_url}|${link_suffix}>` },
         { type: 'mrkdwn', text: `*ref*\n${ref}` },
         { type: 'mrkdwn', text: `*event name*\n${eventName}` },
         { type: 'mrkdwn', text: `*workflow*\n<${action_url}|${workflow}>` },
