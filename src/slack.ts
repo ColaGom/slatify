@@ -54,11 +54,15 @@ export class Slack extends IncomingWebhook {
     } else {
       action_url += `/commit/${sha}/checks`;
     }
-
+    
+    const link_label = (eventName === 'pull_request') ? 'link' : 'repository'
+    const link_suffix = (eventName === 'pull_request') ? `${owner}/${repo}/pull/${number}` : `${owner}/${repo}`
+    const link_url = `https://github.com/${link_suffix}`;
+    
     const blocks: SectionBlock = {
       type: 'section',
       fields: [
-        { type: 'mrkdwn', text: `*repository*\n<${repo_url}|${owner}/${repo}>` },
+        { type: 'mrkdwn', text: `*${link_label}*\n<${link_url}|${link_suffix}>` },
         { type: 'mrkdwn', text: `*ref*\n${ref}` },
         { type: 'mrkdwn', text: `*event name*\n${eventName}` },
         { type: 'mrkdwn', text: `*workflow*\n<${action_url}|${workflow}>` },
